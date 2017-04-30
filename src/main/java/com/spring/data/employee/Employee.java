@@ -1,5 +1,6 @@
 package com.spring.data.employee;
 
+import com.spring.data.com.spring.data.core.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -12,13 +13,13 @@ import javax.persistence.Id;
  */
 @Data
 @Entity
-class Employee{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+class Employee extends BaseEntity{
     String firstName;
     String lastName;
 
-    private Employee(){}
+    private Employee(){
+        super();
+    }
     public Employee(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
