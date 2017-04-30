@@ -1,6 +1,7 @@
 package com.spring.data.review;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
@@ -8,6 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 
 @RepositoryRestResource
-public interface ReviewRepository extends CrudRepository<Review, Long> {
+public interface ReviewRepository extends PagingAndSortingRepository<Review, Long> {
+
+
 
 }
