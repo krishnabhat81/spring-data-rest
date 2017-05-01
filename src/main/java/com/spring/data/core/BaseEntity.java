@@ -1,4 +1,4 @@
-package com.spring.data.com.spring.data.core;
+package com.spring.data.core;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
