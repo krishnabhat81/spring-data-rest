@@ -3,12 +3,15 @@ package com.spring.data.core;
 import com.spring.data.course.Course;
 import com.spring.data.course.CourseRepository;
 import com.spring.data.review.Review;
+import com.spring.data.user.User;
+import com.spring.data.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -19,10 +22,12 @@ import java.util.stream.IntStream;
 @Component
 public class DatabaseLoader implements ApplicationRunner {
     private final CourseRepository courses;
+    private final UserRepository users;
 
     @Autowired
-    public DatabaseLoader(CourseRepository courses) {
+    public DatabaseLoader(CourseRepository courses, UserRepository users) {
         this.courses = courses;
+        this.users = users;
     }
 
     @Override
@@ -47,6 +52,16 @@ public class DatabaseLoader implements ApplicationRunner {
                 "Spring boot project"
         };
 
+        List<User> students = Arrays.asList(
+                new User("Krishna1", "Bhat", "krishna1", "krishna1", new String[] {"ROLE_USER"}),
+                new User("Krishna2", "Bhat", "krishna2", "krishna2", new String[] {"ROLE_USER"}),
+                new User("Krishna3", "Bhat", "krishna3", "krishna3", new String[] {"ROLE_USER"}),
+                new User("Krishna4", "Bhat", "krishna4", "krishna4", new String[] {"ROLE_USER"})
+        );
+
+        users.save(students);
+        users.save(new User("Krishna", "Bhat", "krishna", "krishna", new String[] {"ROLE_USER", "ROLE_ADMIN"}))
+
         List<Course> tmpCources = new ArrayList<>();
 
         IntStream.range(0, 100)
@@ -55,7 +70,9 @@ public class DatabaseLoader implements ApplicationRunner {
                     String message = messages[i % messages.length];
                     String title = String.format(template, message);
                     Course c = new Course(title, "http:www.example.com");
-                    c.addReview(new Review(i % 5, String.format("More %s please!", message)));
+                    Review review = new Review((i % 5) + 1, String.format("More %s please!", message));
+                    review.setReviewer(students.get(i % students.size()));
+                    c.addReview(review);
                     tmpCources.add(c);
                 });
 

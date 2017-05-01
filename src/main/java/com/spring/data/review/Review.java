@@ -2,6 +2,7 @@ package com.spring.data.review;
 
 import com.spring.data.core.BaseEntity;
 import com.spring.data.course.Course;
+import com.spring.data.user.User;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -20,6 +21,9 @@ public class Review extends BaseEntity {
     @ManyToOne
     private Course course;
 
+    @ManyToOne
+    private User reviewer;
+
     public Review() {
         super();
     }
@@ -36,5 +40,9 @@ public class Review extends BaseEntity {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public void setReviewer(User reviewer){
+        this.reviewer = reviewer;
     }
 }
