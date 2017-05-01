@@ -60,7 +60,7 @@ public class DatabaseLoader implements ApplicationRunner {
         );
 
         users.save(students);
-        users.save(new User("Krishna", "Bhat", "krishna", "krishna", new String[] {"ROLE_USER", "ROLE_ADMIN"}))
+        users.save(new User("Krishna", "Bhat", "krishna", "krishna", new String[] {"ROLE_USER", "ROLE_ADMIN"}));
 
         List<Course> tmpCources = new ArrayList<>();
 
